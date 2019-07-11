@@ -5,7 +5,31 @@
 -- Dumped from database version 11.4 (Ubuntu 11.4-0ubuntu0.19.04.1)
 -- Dumped by pg_dump version 11.3
 
--- Started on 2019-07-06 21:26:18
+-- Started on 2019-07-08 21:14:06
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+DROP DATABASE plugin_database;
+--
+-- TOC entry 2984 (class 1262 OID 16462)
+-- Name: plugin_database; Type: DATABASE; Schema: -; Owner: postgres
+--
+
+CREATE DATABASE plugin_database WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8';
+
+
+ALTER DATABASE plugin_database OWNER TO postgres;
+
+\connect plugin_database
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -54,7 +78,7 @@ CREATE SEQUENCE public.category_id_category_seq
 ALTER TABLE public.category_id_category_seq OWNER TO postgres;
 
 --
--- TOC entry 2984 (class 0 OID 0)
+-- TOC entry 2985 (class 0 OID 0)
 -- Dependencies: 201
 -- Name: category_id_category_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -95,7 +119,7 @@ CREATE SEQUENCE public.company_id_company_seq
 ALTER TABLE public.company_id_company_seq OWNER TO postgres;
 
 --
--- TOC entry 2985 (class 0 OID 0)
+-- TOC entry 2986 (class 0 OID 0)
 -- Dependencies: 206
 -- Name: company_id_company_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -140,7 +164,7 @@ CREATE SEQUENCE public.deal_id_deal_seq
 ALTER TABLE public.deal_id_deal_seq OWNER TO postgres;
 
 --
--- TOC entry 2986 (class 0 OID 0)
+-- TOC entry 2987 (class 0 OID 0)
 -- Dependencies: 204
 -- Name: deal_id_deal_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -194,7 +218,7 @@ CREATE SEQUENCE public.link_id_link_seq
 ALTER TABLE public.link_id_link_seq OWNER TO postgres;
 
 --
--- TOC entry 2987 (class 0 OID 0)
+-- TOC entry 2988 (class 0 OID 0)
 -- Dependencies: 196
 -- Name: link_id_link_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -250,7 +274,7 @@ CREATE SEQUENCE public.plugin_id_plugin_seq
 ALTER TABLE public.plugin_id_plugin_seq OWNER TO postgres;
 
 --
--- TOC entry 2988 (class 0 OID 0)
+-- TOC entry 2989 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: plugin_id_plugin_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
@@ -361,6 +385,7 @@ COPY public.category (id_category, name, created, updated) FROM stdin;
 
 COPY public.company (id_company, name, url, created, updated) FROM stdin;
 1	Steinberg	https://www.steinberg.net/	2019-07-06 05:12:42+00	2019-07-06 05:12:42+00
+2	Scuffham	https://www.scuffhamamps.com/	2019-07-06 05:12:42+00	2019-07-06 05:12:42+00
 \.
 
 
@@ -373,6 +398,7 @@ COPY public.company (id_company, name, url, created, updated) FROM stdin;
 COPY public.deal (id_deal, id_link, description, price, start_date, end_date, created, updated, id_plugin) FROM stdin;
 1	1	30% off	319.99	2019-07-01 00:00:01+00	2019-07-31 23:59:59+00	2019-07-06 05:12:42+00	2019-07-06 05:12:42+00	1
 2	2	30% off	69.99	2019-07-01 00:00:01+00	2019-07-31 23:59:59+00	2019-07-06 05:12:42+00	2019-07-06 05:12:42+00	2
+4	3	$30 off S-Gear	99.00	2019-07-07 00:00:01+00	\N	2019-07-07 05:12:42+00	2019-07-07 05:12:42+00	3
 \.
 
 
@@ -385,6 +411,7 @@ COPY public.deal (id_deal, id_link, description, price, start_date, end_date, cr
 COPY public.deal_tag (id_tag, id_deal) FROM stdin;
 1	1
 1	2
+512	3
 \.
 
 
@@ -397,6 +424,7 @@ COPY public.deal_tag (id_tag, id_deal) FROM stdin;
 COPY public.link (id_link, title, url, created, updated) FROM stdin;
 1	Steinberg - WaveLab 9.5 Pro	https://www.steinberg.net/en/promotion/wavelab_offer.html	2019-07-06 05:12:42+00	2019-07-06 05:12:42+00
 2	Steinberg - WaveLab 9.5 Elements	https://www.steinberg.net/en/promotion/wavelab_offer.html	2019-07-06 05:12:42+00	2019-07-06 05:12:42+00
+3	Scuffham - S-Gear	https://www.scuffhamamps.com/product/s-gear	2019-07-07 05:12:42+00	2019-07-07 05:12:42+00
 \.
 
 
@@ -409,6 +437,7 @@ COPY public.link (id_link, title, url, created, updated) FROM stdin;
 COPY public.plugin (id_plugin, id_company, created, updated, name) FROM stdin;
 1	1	2019-07-06 05:12:42+00	2019-07-06 05:12:42+00	WaveLab Pro 9.5
 2	1	2019-07-06 05:12:42+00	2019-07-06 05:12:42+00	WaveLab Elements 9.5
+3	2	2019-07-07 05:12:42+00	2019-07-07 05:12:42+00	S-Gear
 \.
 
 
@@ -444,7 +473,7 @@ COPY public.tag (id_tag, name) FROM stdin;
 
 
 --
--- TOC entry 2989 (class 0 OID 0)
+-- TOC entry 2990 (class 0 OID 0)
 -- Dependencies: 201
 -- Name: category_id_category_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -453,7 +482,7 @@ SELECT pg_catalog.setval('public.category_id_category_seq', 1, true);
 
 
 --
--- TOC entry 2990 (class 0 OID 0)
+-- TOC entry 2991 (class 0 OID 0)
 -- Dependencies: 206
 -- Name: company_id_company_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -462,16 +491,16 @@ SELECT pg_catalog.setval('public.company_id_company_seq', 1, true);
 
 
 --
--- TOC entry 2991 (class 0 OID 0)
+-- TOC entry 2992 (class 0 OID 0)
 -- Dependencies: 204
 -- Name: deal_id_deal_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.deal_id_deal_seq', 3, true);
+SELECT pg_catalog.setval('public.deal_id_deal_seq', 4, true);
 
 
 --
--- TOC entry 2992 (class 0 OID 0)
+-- TOC entry 2993 (class 0 OID 0)
 -- Dependencies: 196
 -- Name: link_id_link_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -480,7 +509,7 @@ SELECT pg_catalog.setval('public.link_id_link_seq', 2, true);
 
 
 --
--- TOC entry 2993 (class 0 OID 0)
+-- TOC entry 2994 (class 0 OID 0)
 -- Dependencies: 198
 -- Name: plugin_id_plugin_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
@@ -569,7 +598,7 @@ ALTER TABLE ONLY public.tag
     ADD CONSTRAINT tag_pkey PRIMARY KEY (id_tag);
 
 
--- Completed on 2019-07-06 21:26:19
+-- Completed on 2019-07-08 21:14:07
 
 --
 -- PostgreSQL database dump complete
