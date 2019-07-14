@@ -18,18 +18,18 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-DROP DATABASE plugin_database;
+DROP DATABASE plugin_database_test;
 --
 -- TOC entry 2984 (class 1262 OID 16462)
 -- Name: plugin_database; Type: DATABASE; Schema: -; Owner: postgres
 --
 
-CREATE DATABASE plugin_database WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8';
+CREATE DATABASE plugin_database_test WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'en_US.UTF-8' LC_CTYPE = 'en_US.UTF-8';
 
 
-ALTER DATABASE plugin_database OWNER TO postgres;
+ALTER DATABASE plugin_database_test OWNER TO postgres;
 
-\connect plugin_database
+\connect plugin_database_test
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
