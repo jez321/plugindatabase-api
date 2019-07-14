@@ -21,7 +21,9 @@ const getPlugins = function (req, res) {
                 ${searchField}
                 ORDER BY ${sortby} ${sortdir}
     ;`, params, (err, data) => {
-            console.log(err)
+            if (err) {
+                console.log(err)
+            }
             res.json(data.rows);
             // pool.end()
         })
