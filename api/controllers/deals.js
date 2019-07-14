@@ -15,7 +15,7 @@ const getDeals = function (req, res) {
     // sanitize sortdir
     const sortdir = req.query.sortdir === 'desc' ? 'desc' : 'asc';
 
-    db.pool.query(`SELECT deal.id_deal, plugin.name as name, company.name as company, deal.price, deal.description, deal.start_date, deal.end_date, deal.created as added, json_build_object('title', link.title, 'url', link.url) AS link, t.tags
+    db.pool.query(`SELECT deal.id_deal, plugin.name as name, company.name as company, deal.price, deal.description, deal.start_date, deal.end_date, deal.created as added, json_build_object('title', link.title, 'url', link.url) AS link, t.tags, deal.created, deal.updated
                 FROM deal
                 JOIN plugin ON deal.id_plugin = plugin.id_plugin
                 JOIN company ON company.id_company = plugin.id_company

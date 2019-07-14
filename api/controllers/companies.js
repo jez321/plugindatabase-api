@@ -8,7 +8,7 @@ const getCompanies = function (req, res) {
     // sanitize sortdir
     const sortdir = req.query.sortdir === 'desc' ? 'desc' : 'asc';
 
-    db.pool.query(`SELECT company.id_company, company.name, company.url
+    db.pool.query(`SELECT company.id_company, company.name, company.url, company.created, company.updated
                 FROM company
                 ${searchField}
                 ORDER BY name ${sortdir}
