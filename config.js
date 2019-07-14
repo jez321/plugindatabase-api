@@ -2,9 +2,9 @@ const config = {
     development: {
         database: {
             user: 'postgres',
-            host: '127.0.1.1',
-            database: 'plugin_database',
-            password: 'Pa$$w0rd',
+            host: 'localhost',
+            database: 'plugin_database_test',
+            password: '4v5&PCSn',
             port: 5432
         },
     },
