@@ -1,5 +1,5 @@
 const db = require('../db')
-const sortableColumns = ['name', 'start_date', 'end_date', 'added'];
+const sortableColumns = ['name', 'company', 'category', 'price', 'description', 'start_date', 'end_date', 'created', 'updated'];
 
 const getDeals = function (req, res) {
     const search = req.query.search;
