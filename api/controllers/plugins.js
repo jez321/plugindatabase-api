@@ -15,9 +15,11 @@ const getPlugins = function (req, res) {
     // sanitize sortdir
     const sortdir = req.query.sortdir === 'asc' ? 'asc' : 'desc';
 
-    db.pool.query(`SELECT plugin.id_plugin, plugin.name as name, plugin.created, plugin.updated, company.name as company
-                FROM plugin
-                JOIN company ON company.id_company = plugin.id_company
+    db.pool.query(`SELECT plugin.id_plugin, plugin.name as name, category.name as category, plugin.created, plugin.updated, company.name as company
+                    FROM plugin
+                    JOIN company ON company.id_company = plugin.id_company
+                    JOIN plugin_category on plugin_category.id_plugin = plugin.id_plugin
+                    JOIN category on plugin_category.id_category = category.id_category
                 ${searchField}
                 ORDER BY ${sortby} ${sortdir}
     ;`, params, (err, data) => {
