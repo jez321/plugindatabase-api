@@ -29,7 +29,7 @@ const getDeals = async function (req, res) {
                 JOIN category on plugin_category.id_category = category.id_category
                 ${searchField}
                 ORDER BY ${sortby} ${sortdir}
-    ;`)
+    ;`, params)
     const lowestPrices = await db.pool.query(`SELECT * FROM lowest_prices;`)
     data.rows.forEach(r => {
         r.lowestPrice = lowestPrices.rows.find(lp => {
