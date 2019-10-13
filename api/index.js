@@ -4,16 +4,28 @@ const dealRouter = require('./routes/deals');
 const companyRouter = require('./routes/companies');
 const pluginRouter = require('./routes/plugins');
 const tagRouter = require('./routes/tags');
+const fs = require('fs');
+//const https = require('https');
 
 const app = express();
-app.use(cors());
-app.options('*', cors());
+const router = express.Router();
+router.use(cors());
+router.options('*', cors());
 
 app.listen(3001, () => {
-    console.log("Server running on port 3001");
+	console.log("Server running on port 3001");
 });
-
-app.use('/deals', dealRouter.router)
-app.use('/companies', companyRouter.router)
-app.use('/plugins', pluginRouter.router)
-app.use('/tags', tagRouter.router)
+/*
+https.createServer({
+  key: fs.readFileSync('/etc/letsencrypt/live/plugindatabase.net/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/plugindatabase.net/cert.pem'),
+  ca: fs.readFileSync('/etc/letsencrypt/live/plugindatabase.net/chain.pem')
+}, router).listen(3001, () => {
+  console.log('Listening');
+});
+*/
+router.use('/deals', dealRouter.router)
+router.use('/companies', companyRouter.router)
+router.use('/plugins', pluginRouter.router)
+router.use('/tags', tagRouter.router)
+app.use('/api', router)
