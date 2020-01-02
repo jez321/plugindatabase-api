@@ -9,11 +9,11 @@ const getPlugins = function (req, res) {
     // sanitize sortby
     let sortby = req.query.sortby;
     if (!sortableColumns.includes(sortby)) {
-        sortby = 'updated'
+        sortby = 'name'
     }
 
     // sanitize sortdir
-    const sortdir = req.query.sortdir === 'asc' ? 'asc' : 'desc';
+    const sortdir = req.query.sortdir === 'desc' ? 'desc' : 'asc';
 
     db.pool.query(`SELECT plugin.id_plugin, plugin.name as name, category.name as category, plugin.created, plugin.updated, company.name as company
                     FROM plugin
